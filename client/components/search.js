@@ -27,8 +27,8 @@ class Search extends React.Component {
       </div>
       <div className="checkbox">
       <span id="checktext">Show me:</span>
-        <input ref="food" type="checkbox" id="checkbox"></input><span id="checktext">Food</span>
-        <input ref="attractions" type="checkbox" id="checkbox"></input><span id="checktext">Attractions</span>
+        <input id="checkbox" type="checkbox" ref="food" defaultChecked={this.props.food || (!this.props.food && !this.props.attractions)}></input><span id="checktext">Food</span> 
+        <input id="checkbox" type="checkbox" ref="attractions" defaultChecked={this.props.attractions || (!this.props.food && !this.props.attractions)}></input><span id="checktext">Attractions</span>
       </div>
       </div>
     )

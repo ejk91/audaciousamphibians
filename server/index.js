@@ -266,7 +266,7 @@ app.get('*', function (req, res) {
   res.sendFile(path.resolve(__dirname, '../public/index.html'))
 })
 
-var port = process.env.PORT || 3000
+var port = process.env.PORT || 3306
 app.listen(port, function() {
   console.log(`listening on port ${port}!`);
 });

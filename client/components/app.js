@@ -41,11 +41,23 @@ class App extends React.Component {
       <div id="app">
         <NavBar />
         <Switch>
-          <Route exact path="/" render={props => (<LandingPage {...props} setFilters={this.setFilters} setRoute={this.setRoute}/>)} />
-          <Route path="/trip" render={props => (<TripPage {...props} food={this.state.food} attractions={this.state.attractions} start={this.state.start} end={this.state.end} setFilters={this.setFilters} setRoute={this.setRoute}/>)}/>
-          <Route path="/signup" component={Signup}/>
-          <Route path="/login" component={Login}/>
-          <Route component={NotFound}/>
+        <Route exact path="/" 
+               render={props => (<LandingPage {...props} 
+               setFilters={this.setFilters} 
+               setRoute={this.setRoute}/>)} 
+        />
+        <Route path="/trip" 
+               render={props => (<TripPage {...props} 
+               filterFood={this.state.food} 
+               filterAttractions={this.state.attractions} 
+               start={this.state.start} 
+               end={this.state.end} 
+               setFilters={this.setFilters} 
+               setRoute={this.setRoute}/>)}
+        />
+        <Route path="/signup" component={Signup}/>
+        <Route path="/login" component={Login}/>
+        <Route component={NotFound}/>
         </Switch>
       </div>
     )
