@@ -9,8 +9,9 @@ class POI extends React.Component {
       selectedTab: 0,
       selectedPOIs: [],
       foodPlaces: [],
-      attractionsPlaces: [],
-      allPOIs: this.props.foodMarker.concat(this.props.attractionsMarker)
+      attractionPlaces: [],
+      foodFilter: this.props.food,
+      attractionFilter: this.props.attractions
     }
     this.setTab = this.setTab.bind(this);
     this.addPOI = this.addPOI.bind(this);
@@ -19,7 +20,8 @@ class POI extends React.Component {
 
   componentWillReceiveProps(props) {
     this.setState({
-      allPOIs: props.foodMarker.concat(props.attractionsMarker)
+      foodPlaces: props.foodPlaces,
+      attractionPlaces: props.attractionPlaces
     })
   }
 
@@ -46,8 +48,16 @@ class POI extends React.Component {
   }
 
   renderPOIEntry() {
+    let POIs
+    if ((this.props.food && this.props.attractions) || (!this.props.food && !this.props.attractions)) {
+      POIs = this.state.foodPlaces.concat(this.state.attractionPlaces)
+    } else if (this.props.food) {
+      POIs = this.state.foodPlaces
+    } else if (this.props.attractions) {
+      POIs = this.state.attractionPlaces
+    }
     if (this.state.selectedTab === 0) {
-      return this.state.allPOIs.map((entry) => {
+      return POIs.map((entry) => {
         return (<POIEntry {...entry} 
                   key={entry.place_id} 
                   setSelectedPOI={this.props.setSelectedPOI}
@@ -70,7 +80,15 @@ class POI extends React.Component {
   render() {
     return(
       <div id="poi">
-        <Search setFilters={this.props.setFilters} setRoute={this.props.setRoute} history={this.props.history} food={this.props.food} attractions={this.props.attractions}/>
+        <Search 
+          setFilters={this.props.setFilters} 
+          setRoute={this.props.setRoute} 
+          history={this.props.history} 
+          food={this.props.food} 
+          attractions={this.props.attractions}
+          start={this.props.start}
+          end={this.props.end}
+        />
         <div>
           <div onClick={this.setTab.bind(null, 1)}>My Places</div>
           <div onClick={this.setTab.bind(null, 0)}>Places</div>

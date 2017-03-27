@@ -56,8 +56,8 @@ class TripPage extends React.Component {
       <div id="trip">
         <POI food={this.props.food}
           attractions={this.props.attractions}
-          foodMarker={this.state.food}
-          attractionsMarker={this.state.attractions}
+          foodPlaces={this.state.food}
+          attractionPlaces={this.state.attractions}
           selectedPOI={this.state.selectedPOI}
           setSelectedPOI={this.setSelectedPOI}
           setFilters={this.props.setFilters}
