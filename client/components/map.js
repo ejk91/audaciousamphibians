@@ -21,8 +21,14 @@ class MapPage extends React.Component {
     return this.state.midpoint.lat + ',' + this.state.midpoint.lng
   }
 
-  allMarkers() {
-    return this.state.foodMarkers.concat(this.state.attractionsMarker)
+  renderMarkers() {
+    if ((this.props.food && this.props.attractions) || (!this.props.food && !this.props.attractions)) {
+      return this.state.foodMarkers.concat(this.state.attractionsMarker)
+    } else if (this.props.food) {
+      return this.state.foodMarkers
+    } else if (this.props.attractions) {
+      return this.state.attractionsMarker
+    }
   }
 
   setFoodMarkers(food) {
@@ -100,13 +106,8 @@ class MapPage extends React.Component {
           let lng = (step.start_location.lng() + step.end_location.lng()) / 2
           let midpoint = {lat: lat, lng: lng}
           let radius = this.calcRadius(step.start_location.lat(), step.start_location.lng(), step.end_location.lat(), step.end_location.lng()) * 1000
-
-          if (this.props.food || (!this.props.food && !this.props.attractions)) {
-            this.fetchFoodPlaces(midpoint, radius, memo)
-          }
-          if (this.props.attractions || (!this.props.food && !this.props.attractions)) {
-            this.fetchAttractionPlaces(midpoint, radius, memo)
-          }
+          this.fetchFoodPlaces(midpoint, radius, memo)
+          this.fetchAttractionPlaces(midpoint, radius, memo)
         })
       })
     })
@@ -186,7 +187,7 @@ class MapPage extends React.Component {
           containerElement={<div style={{height: `100%`}}/>}
           mapElement={<div style={{height: `100%`}}/>}
           directions={this.state.directions}
-          markers={this.allMarkers()}
+          markers={this.renderMarkers()}
           {...this.props}
           >
           </DrivingGoogleMap>
