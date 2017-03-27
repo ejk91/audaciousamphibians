@@ -8,6 +8,8 @@ class POI extends React.Component {
     this.state = {
       selectedTab: 0,
       selectedPOIs: [],
+      foodPlaces: [],
+      attractionsPlaces: [],
       allPOIs: this.props.foodMarker.concat(this.props.attractionsMarker)
     }
     this.setTab = this.setTab.bind(this);
@@ -68,7 +70,7 @@ class POI extends React.Component {
   render() {
     return(
       <div id="poi">
-        <Search setFilters={this.props.setFilters} setRoute={this.props.setRoute} history={this.props.history}/>
+        <Search setFilters={this.props.setFilters} setRoute={this.props.setRoute} history={this.props.history} food={this.props.food} attractions={this.props.attractions}/>
         <div>
           <div onClick={this.setTab.bind(null, 1)}>My Places</div>
           <div onClick={this.setTab.bind(null, 0)}>Places</div>

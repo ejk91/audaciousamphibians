@@ -48,8 +48,8 @@ class App extends React.Component {
         />
         <Route path="/trip" 
                render={props => (<TripPage {...props} 
-               filterFood={this.state.food} 
-               filterAttractions={this.state.attractions} 
+               food={this.state.food} 
+               attractions={this.state.attractions} 
                start={this.state.start} 
                end={this.state.end} 
                setFilters={this.setFilters} 
